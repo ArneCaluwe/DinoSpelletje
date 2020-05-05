@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dino spelletje</title>
+</head>
+<body>
+
+
+<!--<canvas id="screen" width="800", height="600" style="background-color: azure">
+    <script src="app/js/main.js"></script>
+    <script>
+        let canvas = document.getElementById("screen");
+        let ctx = canvas.getContext("2d");
+
+        var rightPressed = false;
+        var leftPressed = false;
+
+        function keydownHandler(e) {
+            if(e.key == "Right" || e.key == "ArrowRight"){
+                rightPressed = true;
+                ctx.fillStyle = "rgba(0, 50, 200, 0.5)";
+            }else if (e.key == "left" || e.key == "ArrowLeft"){
+                leftPressed = true
+                ctx.fillStyle = "rgba(200, 50, 0, 0.5)";
+            }
+        }
+        function keyupHandler(e) {
+            if(e.key == "Right" || e.key == "ArrowRight"){
+                rightPressed = false;
+
+            }else if (e.key == "left" || e.key == "ArrowLeft"){
+                leftPressed = false
+                ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+            }
+        }
+
+        document.addEventListener("keyup", keyupHandler, false);
+        document.addEventListener("keydown", keydownHandler , false);
+
+        let x = 20;
+        let y = 20;
+
+        let size = 15;
+
+        let dx = 2;
+        let dy = 2;
+
+        let paddleX = canvas.width/2, paddleY = canvas.height - 30;
+        let paddleWidth = 30, paddleHeight = 15;
+
+        draw = function () {
+            // leeg  het scherm
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            //test of je uit het scherm zo vallen
+            if(y + dy < size/2 ){
+                dy = -dy;
+            }else if(y + dy > canvas.height - size){
+                alert("Game Over");
+            }
+            if(x + dx < size/2 ||x + dx > canvas.width - size/2){
+                dx = -dx;
+            }
+
+            // teken
+            drawmanneke(x, y, 15)
+
+            drawpaddle(paddleX, paddleY, paddleWidth, paddleHeight);
+
+            if(rightPressed){
+                paddleX += Math.abs(dx);
+            }else if(leftPressed){
+                paddleX -= Math.abs(dx);
+            }
+
+            // beweeg
+            x += dx;
+            y += dy;
+        }
+
+        drawpaddle = function(x, y, width, height){
+            ctx.fillStyle = "black";
+
+            ctx.beginPath();
+            ctx.rect(x,y, width, height);
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        drawmanneke = function(x, y, size){
+            let radius = size;
+
+            ctx.beginPath();
+            ctx.arc(0 + x,0 + y, radius, 0, Math.PI*2)
+            ctx.fill();
+            ctx.closePath();
+        }
+
+
+        let interval = setInterval(draw, 10)
+
+
+    </script>
+</canvas>-->
+
+<canvas id="dino" width="800" height="600" style="background-color: white">
+    <script src="app/js/character.js"></script>
+    <script src="app/js/obstacle.js"></script>
+    <script>
+        let canvas = document.getElementById("dino");
+        let ctx = canvas.getContext("2d");
+
+
+
+
+
+        // Add keyhandlers
+        function keyUpHandler(e) {
+
+        }
+
+
+        function keyDownHandler(e) {
+            if(e.key === "Space" || e.key === "ArrowUp"){
+                jump();
+            }
+            if(e.key === "Escape"){
+                die();
+            }
+        }
+
+        document.addEventListener('keydown', keyUpHandler, false);
+        document.addEventListener('keydown', keyDownHandler, false);
+
+
+        //Draw
+
+
+        draw = function () {
+
+            ctx.clearRect(0,0,canvas.width, canvas.height);
+
+            drawCharacter(ctx, canvas);
+            drawObstacle(ctx, canvas);
+
+            animationframe ++;
+
+        }
+
+        stopGame = function(){
+            clearInterval(interval)
+        }
+
+
+
+        let interval = setInterval(draw, 90);
+
+
+
+    </script>
+</canvas>
+</body>
+</html>
